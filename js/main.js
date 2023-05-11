@@ -4,8 +4,8 @@
 // Dopo 30 secondi i numeri scompaiono e l’utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
 let outputRng = document.getElementById("rng");
-let rng;
-let seconds = 30;
+let rng, divSelector = document.getElementById("contenitore");
+let seconds = 1;
 const contatoreScelta = ["primo", "secondo", "terzo", "quarto", "quinto"];
 function randomNumberArrayGenerator(max, timesGenerated){
 
@@ -35,10 +35,11 @@ function timerScomparsaNumeri(){
     
 
 // Visualizzare in pagina 5 numeri casuali.
-const userSelectedNums = []; 
+ 
 rng = randomNumberArrayGenerator(100, 5);
-outputRng.innerHTML = `ciao i numeri generati sono: ${rng}`
+outputRng.innerHTML = `ciao i numeri generati sono: ${rng}`;
 outputRng.append();
+console.log(rng);
 
 
 
@@ -52,31 +53,58 @@ outputRng.append();
 
 let clock = setInterval(() => {
     if(seconds === 0){
-        outputRng.innerHTML =""
+        outputRng.innerHTML ="";
+        divSelector.innerHTML += `<input type="button" id="submit" value="submit">`;
+        divSelector.append();
         for(let i = 0; i < rng.length; i++){
             // Dopo 30 secondi i numeri scompaiono e l’utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
-            userSelectedNums.push(parseInt(prompt("inserisci il " + contatoreScelta[i])));
-        
+            // userSelectedNums.push(parseInt(prompt("inserisci il " + contatoreScelta[i])));
+            divSelector.innerHTML += `<input type="number" id="${contatoreScelta[i]}" value="${contatoreScelta[i]}">`;
+            divSelector.append();
+            
         }
-        clearInterval(clock);
-          // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
-        const userNumsCorrectGuess = [];
+        divSelector = document.getElementById("submit");
+            console.log(divSelector);
+            divSelector.addEventListener("click", 
+            function(){
+                let btnNumValue;
+                let userSelectedNums = [];
+                for(let i = 0; i < rng.length; i++){
+                    btnNumValue = parseInt(document.getElementById(contatoreScelta[i]).value);
+                    console.log(btnNumValue);
+                    userSelectedNums.push(btnNumValue);
+                    
+                    
+                }
+        // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
+        let userNumsCorrectGuess = [];
+        
         for(let i = 0; i < rng.length; i++ ){
-        
-        
+            console.log(userSelectedNums + "numeri user");
+            console.log(rng + "rng");
+            console.log(userNumsCorrectGuess);
             if(userSelectedNums.includes(rng[i])){
                 userNumsCorrectGuess.push(rng[i]);
+                
             }
+            console.log("numeri selezionati dallo user " + userNumsCorrectGuess, "numeri generati dalla funzione " + rng, "quantità di numeri indovinata dallo user " + userNumsCorrectGuess.length);
     
         
     }
-    console.log("numeri selezionati dallo user " + 0 + userNumsCorrectGuess, "numeri generati dalla funzione " + rng, "quantità di numeri indovinata dallo user " + userNumsCorrectGuess.length);
+     
+            }
+            );
+
+        
+        clearInterval(clock);
+
+
     }
     else{
         seconds--;
         console.log(seconds + 1);
     }
-
+    
 }, 1000);
 
 
