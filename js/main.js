@@ -87,6 +87,8 @@ let clock = setInterval(() => {
                 userNumsCorrectGuess.push(rng[i]);
                 
             }
+            divSelector = document.getElementById("contenitore");
+            divSelector.innerHTML = `<span> I numeri selezionati dallo user sono ${userNumsCorrectGuess}, i numeri generati dalla funzione sono ${rng}, la quantità di numeri indovinata dallo user è ${userNumsCorrectGuess.length} </span>`;
             console.log("numeri selezionati dallo user " + userNumsCorrectGuess, "numeri generati dalla funzione " + rng, "quantità di numeri indovinata dallo user " + userNumsCorrectGuess.length);
     
         
