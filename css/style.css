@@ -27,6 +27,7 @@ header{
 }
 .header-container-right{
     justify-content: end;
+    display: none;
 }
 img{
     width: 100px;
@@ -40,6 +41,7 @@ button{
 #punteggio{
     border: 1px solid black;
     padding: 2px;
+    display: none;
 }
 #button-play{
 
@@ -64,10 +66,16 @@ main{
 }
 
 #grid{
+    display: flex;
+    flex-wrap: wrap;
     height: 500px;
     width: 500px;
 }
-
+#counter-grid{}
+.btn-num{
+    padding: 10px;
+    width: 100%;;
+}
 #rng{
 
 }
@@ -82,7 +90,13 @@ main{
 
 #quinto{}
 
-#submit{}
+#submit{
+    padding: 30px;
+    width: 100%;
+    font-size: 50px;
+}
+
+#timer{}
 
 .hidden-grid{
     display: none;
